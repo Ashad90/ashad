@@ -102,6 +102,16 @@ section {
     @apply xl:w-[70%] w-full h-full min-h-[50vh] absolute xl:-top-20 top-24 xl:-right-20 right-0;
   }
 
+  /* Hero Buttons Container */
+  .hero-buttons-container {
+    @apply flex flex-col sm:flex-row gap-4 md:gap-5 items-stretch;
+  }
+
+  /* Hero Button Styles */
+  .hero-button {
+    @apply md:w-80 md:h-16 w-full h-12 flex-shrink-0;
+  }
+
   .navbar {
     @apply fixed w-full left-1/2 py-5 px-5 md:px-20 -translate-x-1/2 z-[100] transition-all duration-300 ease-in-out;
 
@@ -152,6 +162,19 @@ section {
         }
       }
     }
+  }
+
+  /* Mobile Menu Styles */
+  .mobile-menu-button {
+    @apply lg:hidden flex flex-col justify-center items-center w-8 h-8 z-50;
+  }
+
+  .mobile-menu-overlay {
+    @apply lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300;
+  }
+
+  .mobile-menu {
+    @apply lg:hidden fixed top-0 right-0 h-full w-64 bg-black-100 z-50 transform transition-transform duration-300 ease-in-out;
   }
 
   .app-showcase {
@@ -469,4 +492,81 @@ section {
 
 .card:hover::before {
   opacity: 1;
+}
+
+/* Responsive optimizations for mobile performance */
+@media (max-width: 768px) {
+  .hero-3d-layout {
+    display: none; /* Hide 3D on mobile for better performance */
+  }
+  
+  .hero-text {
+    font-size: 24px !important;
+  }
+  
+  .hero-text .slide {
+    height: 36px !important;
+  }
+
+  /* Reduce animations on mobile for better performance */
+  .wrapper {
+    animation-duration: 30s; /* Slower animation on mobile */
+  }
+
+
+
+  /* Reduce transition durations on mobile */
+  * {
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* TV and large screen optimizations */
+@media (min-width: 1920px) {
+  .hero-text {
+    font-size: 80px !important;
+  }
+  
+  .section-padding {
+    padding-left: 10vw !important;
+    padding-right: 10vw !important;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero-text {
+    font-size: 40px !important;
+  }
+  
+  .hero-3d-layout {
+    width: 50% !important;
+  }
+
+  /* Reduce animations on tablet */
+  .wrapper {
+    animation-duration: 25s;
+  }
+}
+
+/* Performance optimizations for Vercel */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimize for slow connections */
+@media (max-width: 480px) {
+  .hero-text {
+    font-size: 20px !important;
+  }
+  
+  .hero-text .slide {
+    height: 30px !important;
+  }
 }

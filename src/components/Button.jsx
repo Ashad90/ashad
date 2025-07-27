@@ -1,41 +1,26 @@
-/**
- * A reusable CTA button component.
- * When clicked, it scrolls smoothly to the section with ID "counter",
- * with a small offset from the top for better visual placement.
- */
+import { forwardRef } from "react";
 
-const Button = ({ text, className, id }) => {
+const Button = forwardRef(({ text, className = "", id, onClick, icon, ...props }, ref) => {
   return (
-    <a
-      onClick={(e) => {
-        e.preventDefault(); // Stop the link from jumping instantly
-
-        const target = document.getElementById("counter"); // Find the section with ID "counter"
-
-        // Only scroll if we found the section and an ID is passed in
-        // taht prevents the contact button from scrolling to the top
-        if (target && id) {
-          const offset = window.innerHeight * 0.15; // Leave a bit of space at the top
-
-          // Calculate how far down the page we need to scroll
-          const top =
-            target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-          // Scroll smoothly to that position
-          window.scrollTo({ top, behavior: "smooth" });
-        }
-      }}
-      className={`${className ?? ""} cta-wrapper`} // Add base + extra class names
+    <button
+      ref={ref}
+      id={id}
+      onClick={onClick}
+      className={`group relative overflow-hidden rounded-lg bg-black-200 px-6 py-4 text-white-50 transition-all duration-300 hover:bg-black-50 flex items-center justify-center ${className}`}
+      {...props}
     >
-      <div className="cta-button group">
-        <div className="bg-circle" />
-        <p className="text">{text}</p>
-        <div className="arrow-wrapper">
-          <img src="/images/arrow-down.svg" alt="arrow" />
-        </div>
+      <div className="bg-circle"></div>
+      <span className="text relative z-10 font-semibold flex items-center gap-2 whitespace-nowrap">
+        {icon && icon}
+        {text}
+      </span>
+      <div className="arrow-wrapper">
+        <img src="/images/arrow-right.svg" alt="arrow" />
       </div>
-    </a>
+    </button>
   );
-};
+});
+
+Button.displayName = "Button";
 
 export default Button;

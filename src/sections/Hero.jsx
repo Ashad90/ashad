@@ -15,6 +15,11 @@ const Hero = () => {
     );
   });
 
+  // Fonction pour télécharger le CV
+  const handleDownloadCV = () => {
+    window.open("/api/download-cv", "_blank");
+  };
+
   return (
     <section id="hero" className="relative overflow-hidden">
       <div className="absolute top-0 left-0 z-10">
@@ -51,15 +56,27 @@ const Hero = () => {
             </div>
 
             <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-              Hi, I’m Ashad, a developer based in Central African Republic with a passion for
+              Hi, I'm Ashad, a developer based in Central African Republic with a passion for
               code and design.
             </p>
 
-            <Button
-              text="See My Work"
-              className="md:w-80 md:h-16 w-60 h-12"
-              id="counter"
-            />
+            <div className="hero-buttons-container">
+              <Button
+                text="See My Work"
+                className="hero-button"
+                id="counter"
+              />
+              <Button
+                text="Download my CV"
+                className="hero-button bg-blue-600 hover:bg-blue-700"
+                onClick={handleDownloadCV}
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0l-6-6m6 6l6-6" />
+                  </svg>
+                }
+              />
+            </div>
           </div>
         </header>
 
